@@ -3,6 +3,7 @@
 ## Step 1: Launch an Anyscale workspace
 
 * Start a new [Anyscale workspace](https://docs.anyscale.com/get-started) using an `n1-standard-32-nvidia-t4-16gb-2` head node on GCP, which has 2 GPUs and 32 CPUs.
+* Disable autoscaling by deleting the worker node types.
 * Use the `default_cluster_env_2.10.0_py39` cluster environment.
 
 ## Step 2: Clone this repository
@@ -16,6 +17,10 @@ git clone https://github.com/kevin85421/kuberay-rag-demo.git
 ```bash
 # path: kuberay-rag-demo/anyscale/
 bash setup-pgvector.sh
+
+# path: kuberay-rag-demo/anyscale/
+# Initialize the schema.
+sudo -u postgres psql -f vector-768.sql
 ```
 
 ## Step 4 (option 1): Index Ray document embeddings into Postgres
@@ -29,7 +34,9 @@ sudo -u postgres psql -f gte-base_300_50.sql
 
 ## Step 4 (option 2): Generate embeddings with Ray Data and index them into Postgres
 
-* TODO
+Follow the notebook [rag-demo-embedding-generation.ipynb](rag-demo-embedding-generation.ipynb) to generate embeddings with Ray Data and index them into Postgres.
+
+* Further reading: [RAG at Scale: 10x Cheaper Embedding Computations with Anyscale and Pinecone](https://www.anyscale.com/blog/rag-at-scale-10x-cheaper-embedding-computations-with-anyscale-and-pinecone)
 
 ## Step 5: Verify the Postgres database
 
