@@ -23,7 +23,14 @@ bash setup-pgvector.sh
 sudo -u postgres psql -f vector-768.sql
 ```
 
-## Step 4 (option 1): Index Ray document embeddings into Postgres
+## Step 4: Install the Python dependencies
+
+```bash
+# path: kuberay-rag-demo/anyscale/
+pip install --user -r requirements.txt
+```
+
+## Step 5 (option 1): Index Ray document embeddings into Postgres
 
 You can download the pre-generated embeddings from Google Cloud Storage and index them into Postgres.
 
@@ -32,13 +39,13 @@ wget https://storage.googleapis.com/ray-docs-embedding-postgres-dump/gte-base_30
 sudo -u postgres psql -f gte-base_300_50.sql
 ```
 
-## Step 4 (option 2): Generate embeddings with Ray Data and index them into Postgres
+## Step 5 (option 2): Generate embeddings with Ray Data and index them into Postgres
 
 Follow the notebook [rag-demo-embedding-generation.ipynb](rag-demo-embedding-generation.ipynb) to generate embeddings with Ray Data and index them into Postgres.
 
 * Further reading: [RAG at Scale: 10x Cheaper Embedding Computations with Anyscale and Pinecone](https://www.anyscale.com/blog/rag-at-scale-10x-cheaper-embedding-computations-with-anyscale-and-pinecone)
 
-## Step 5: Verify the Postgres database
+## Step 6: Verify the Postgres database
 
 Check whether the embeddings are successfully indexed into the Postgres database.
 
@@ -50,13 +57,6 @@ sudo -u postgres psql
 # --------+----------+-------+----------
 #  public | document | table | postgres
 SELECT * FROM document LIMIT 5;
-```
-
-## Step 6: Install the Python dependencies
-
-```bash
-# path: kuberay-rag-demo/anyscale/
-pip install --user -r requirements.txt
 ```
 
 ## Step 7: Create a `.env` file to connect to LLM endpoints
