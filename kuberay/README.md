@@ -19,7 +19,16 @@ kubectl get nodes "-o=custom-columns=NAME:.metadata.name,GPU:.status.allocatable
 # ......   2
 ```
 
-## Step 2: Start a Postgres database and a RayCluster
+## Step 2: Install KubeRay operator
+
+```bash
+helm repo add kuberay https://ray-project.github.io/kuberay-helm/
+helm repo update
+# Deploy the KubeRay operator
+helm install kuberay-operator kuberay/kuberay-operator --version 1.1.0
+```
+
+## Step 3: Start a Postgres database and a RayCluster
 
 ```bash
 # path: kuberay-rag-demo/kuberay/
