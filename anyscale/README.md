@@ -26,7 +26,7 @@ sudo -u postgres psql -f vector-768.sql
 ## Step 4: Install the Python dependencies
 
 ```bash
-# path: kuberay-rag-demo/anyscale/
+# path: kuberay-rag-demo/
 pip install --user -r requirements.txt
 ```
 

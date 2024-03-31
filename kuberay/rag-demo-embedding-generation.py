@@ -1,7 +1,6 @@
 import ray
 import os
 import psycopg
-from dotenv import load_dotenv
 from pathlib import Path
 from bs4 import BeautifulSoup, NavigableString
 from functools import partial
