@@ -51,13 +51,15 @@ You can download the pre-generated embeddings from Google Cloud Storage and inde
 ```bash
 # Execute the following commands in the Ray head Pod
 wget https://storage.googleapis.com/ray-docs-embedding-postgres-dump/gte-base_300_50.sql
-sudo -u postgres psql -f gte-base_300_50.sql -h pgvector
+sudo psql -U postgres -f gte-base_300_50.sql -h pgvector
 # password: postgres
 ```
 
 ## Step 4 (option 2): Generate embeddings with Ray Data and index them into Postgres
 
 ```bash
+# Path: kuberay-rag-demo/kuberay/
+wget -O - https://storage.googleapis.com/ray-docs-embedding-postgres-dump/ray_docs.tar.gz | tar -xz
 python3 rag-demo-embedding-generation.py
 ```
 
@@ -72,7 +74,7 @@ Check whether the embeddings are successfully indexed into the Postgres database
 kubectl exec -it deployment/pgvector -- bash
 
 # Verify the Postgres database
-sudo -u postgres psql
+psql -U postgres
 \dt
 #           List of relations
 #  Schema |   Name   | Type  |  Owner   
